@@ -1,0 +1,101 @@
+body {
+  padding: 24px;
+}
+article,
+article * {
+  position: relative;
+  margin: 4px;
+  padding: 32px 20px;
+  background-color: rgba(0, 0, 0, 0.04);
+  border: 2px solid #ccc;
+  border-radius: 6px;
+}
+article:hover,
+article *:hover {
+  border-color: slateblue;
+}
+article::after,
+article *::after {
+  position: absolute;
+  top: -0.8em;
+  left: 0.6em;
+  font-size: 1.2em;
+  padding: 0.2em 0.64em;
+  color: white;
+  background-color: #bbb;
+  border-radius: 0.8em;
+}
+article:hover::after,
+article *:hover::after {
+  background-color: slateblue;
+}
+
+article {
+  display: flex;
+  width: 920px;
+}
+
+article aside {
+  display: flex;
+}
+
+article aside figure {
+  width: 240px;
+}
+
+article div {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+article div ul {
+  list-style: none;
+}
+
+article div ul li {
+  list-style: none;
+  padding: 24px;
+}
+
+article div ul li.special,
+.card__list-item--special {
+  background-color: #ccc;
+}
+
+article div ul li:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+article::after {
+  content: "article";
+}
+
+article aside::after {
+  content: "aside";
+}
+
+article aside figure::after {
+  content: "figure";
+}
+
+article div::after {
+  content: "div";
+}
+
+article div header::after {
+  content: "header";
+}
+
+article div ul::after {
+  content: "ul";
+}
+
+article div ul li::after {
+  content: "li";
+}
+
+article div ul li.special::after {
+  content: "li.special";
+}
