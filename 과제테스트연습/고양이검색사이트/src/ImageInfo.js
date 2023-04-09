@@ -35,6 +35,22 @@ class ImageInfo {
           </div>
         </div>`;
       this.$imageInfo.style.display = "block";
+
+      document.addEventListener("click", (e) => {
+        console.log(e.target);
+        if (
+          e.target === document.querySelector(".ImageInfo") ||
+          e.target === document.querySelector(".close")
+        ) {
+          this.$imageInfo.style.display = "none";
+        }
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.code === "Escape") {
+          this.$imageInfo.style.display = "none";
+        }
+      });
     } else {
       this.$imageInfo.style.display = "none";
     }
