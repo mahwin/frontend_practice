@@ -183,7 +183,15 @@ class App {
       $target,
       initialData: this.data,
       onClick: (image) => {
-        console.log(image);
+        this.imageInfo.setState({ visible: true, image });
+      },
+    });
+
+    this.imageInfo = new ImageInfo({
+      $target,
+      data: {
+        visible: false,
+        image: null,
       },
     });
   }
