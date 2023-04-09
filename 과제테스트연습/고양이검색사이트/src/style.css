@@ -58,6 +58,19 @@ body * {
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
+
+  /*페이드 인 페이드 아웃  */
+  -o-animation: fadein 0.5s;
+  -webkit-animation: fadein 0.5s;
+  -moz-animation: fadein 0.5s;
+  animation: fadein 0.5s;
+}
+
+.ImageInfo.fade {
+  -o-animation: fadeout 1s;
+  -webkit-animation: fadeout 1s;
+  -moz-animation: fadeout 1s;
+  animation: fadeout 1s;
 }
 
 .ImageInfo .title {
@@ -82,6 +95,7 @@ body * {
 
 .ImageInfo .content-wrapper img {
   width: 100%;
+  height: max(70vh);
 }
 
 /* 반응형 웹 */
@@ -136,5 +150,80 @@ body.dark .ImageInfo .content-wrapper {
   .ImageInfo .content-wrapper {
     background-color: white;
     color: #000;
+  }
+}
+
+/* 페이드 인 */
+@-moz-keyframes fadein {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes fadein {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@-o-keyframes fadein {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* 페이드 아웃 */
+/* 페이드 인 */
+@-moz-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@-o-keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }

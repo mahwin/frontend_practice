@@ -20,6 +20,7 @@ class ImageInfo {
 
   render() {
     if (this.data.visible) {
+      this.$imageInfo.classList.remove("fade");
       const { name, url, temperament, origin } = this.data.image;
 
       this.$imageInfo.innerHTML = `
@@ -37,18 +38,19 @@ class ImageInfo {
       this.$imageInfo.style.display = "block";
 
       document.addEventListener("click", (e) => {
-        console.log(e.target);
         if (
           e.target === document.querySelector(".ImageInfo") ||
           e.target === document.querySelector(".close")
         ) {
           this.$imageInfo.style.display = "none";
+          this.$imageInfo.classList.add("fade");
         }
       });
 
       document.addEventListener("keydown", (e) => {
         if (e.code === "Escape") {
           this.$imageInfo.style.display = "none";
+          this.$imageInfo.classList.add("fade");
         }
       });
     } else {
