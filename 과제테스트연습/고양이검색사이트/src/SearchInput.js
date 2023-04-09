@@ -27,11 +27,16 @@ class SearchInput {
     this.$searchInput.placeholder = "고양이를 검색해보세요.!";
 
     $searchInput.className = "SearchInput";
+    $searchInput.autofocus = "true";
 
     $searchInput.addEventListener("keyup", (e) => {
       if (e.code === "Enter") {
         onSearch(e.target.value);
       }
+    });
+
+    $searchInput.addEventListener("click", (e) => {
+      if (e.target.value.length > 0) e.target.value = "";
     });
 
     this.$header.appendChild(this.$themeInput);
