@@ -191,39 +191,47 @@ body.dark .ImageInfo .content-wrapper {
 }
 
 /* 페이드 아웃 */
-/* 페이드 인 */
-@-moz-keyframes fadein {
+
+@-moz-keyframes fadeout {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
+    display: none;
+    visibility: hidden;
   }
 }
 
-@-webkit-keyframes fadein {
+@-webkit-keyframes fadeout {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
+    display: none;
+    visibility: hidden;
   }
 }
 
-@-o-keyframes fadein {
+@-o-keyframes fadeout {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
+    display: none;
+    visibility: hidden;
   }
 }
 
-@keyframes fadein {
+@keyframes fadeout {
   from {
     opacity: 0;
   }
   to {
     opacity: 1;
+    display: none;
+    visibility: hidden;
   }
 }
