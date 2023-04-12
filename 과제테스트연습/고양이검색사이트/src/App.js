@@ -73,6 +73,10 @@ export default function App($app) {
       visible: false,
       image: null,
     },
+
+    onBackClick: () => {
+      this.setState({ ...this.state, visible: false, image: null });
+    },
   });
 
   const loading = new Loading({
