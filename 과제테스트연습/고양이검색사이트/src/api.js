@@ -1,14 +1,29 @@
-const API_ENDPOINT =
+const API_END_POINT =
   "https://q9d70f82kd.execute-api.ap-northeast-2.amazonaws.com/dev";
 
-const api = {
-  fetchCats: (keyword) => {
-    return fetch(`${API_ENDPOINT}/api/cats/search?q=${keyword}`).then((res) =>
-      res.json()
-    );
-  },
+export const api = async (type, payload) => {
+  let API_SUB_POINT = "";
+  switch (type) {
+    case "search":
+      API_SUB_POINT = `/search?q=${payload}`;
+      break;
+    case "random":
+      API_SUB_POINT = `/random50`;
+      break;
+    default:
+      API_SUB_POINT = `/${payload}`;
+      break;
+  }
 
-  fetchCatDetails: (id) => {
-    return fetch(`${API_ENDPOINT}/api/cats/${id}`).then((res) => res.json());
-  },
+  const res = await fetch(`${API_END_POINT}${API_SUB_POINT}`);
+  switch (Math.floor(res.status / 100)) {
+    case 3:
+      return `Redirects Error with status code ${res.status}`;
+    case 4:
+      return `Clinet Error with status code ${res.status}`;
+    case 5:
+      return `Server Error with status code ${res.status}`;
+    default:
+      return res.json();
+  }
 };
