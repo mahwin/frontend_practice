@@ -1,4 +1,4 @@
-import LazyLoad from "../lib/LazyLoading";
+import LazyLoad from "../lib/LazyLoading.js";
 
 export default function SearchResult({ $app, initialState, onClick }) {
   this.state = initialState;
@@ -20,6 +20,7 @@ export default function SearchResult({ $app, initialState, onClick }) {
             `
       <div class='item' data-index=${index}>
         <img class="lazy" src=${cat.url} alt=${cat.name}/>
+        <div>${cat.name}</div>
       </div>
       `
         )
