@@ -5,6 +5,7 @@ import Loading from "./components/Loading.js";
 import SearchError from "./components/SearchError.js";
 import SearchKeyword from "./components/SearchKeyword.js";
 
+import { setLocalStorage, getLocalStorage } from "./lib/LocalStorage.js";
 import { request } from "./api/api.js";
 
 export default function App($app) {
@@ -32,6 +33,8 @@ export default function App($app) {
       if (nextKeyword.length > 5) {
         nextKeyword = nextKeyword.slice(0, 5);
       }
+
+      setLocalStorage(searchData);
 
       this.setState({
         ...this.state,
@@ -75,6 +78,9 @@ export default function App($app) {
     initialState: this.state.keyword,
     onClick: (keyword) => {
       const keywordData = request("search", keyword);
+
+      setLocalStorage(keywordData);
+
       const nextKeyword = [
         keyword,
         ...this.state.keyword.filter((word) => word != keyword),
@@ -101,5 +107,20 @@ export default function App($app) {
     searchKeyword.setState(this.state.keyword);
   };
 
-  console.log("App is running");
+  const init = () => {
+    console.log("???");
+    const storage = getLocalStorage();
+    console.log(storage);
+    //데이터가 비어있거나, 없거나, 잘못 저장된 경우
+    if (!storage || !storage.data || !storage.data.length) {
+      return;
+    }
+
+    this.setState({
+      ...this.state,
+      data: storage.data,
+    });
+  };
+
+  init();
 }
