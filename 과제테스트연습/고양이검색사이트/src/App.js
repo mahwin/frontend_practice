@@ -25,6 +25,7 @@ export default function App($app) {
 
       if (!searchData.data) return;
 
+      console.log(this.state);
       let nextKeyword = [
         keyword,
         ...this.state.keyword.filter((word) => word != keyword),
@@ -39,7 +40,7 @@ export default function App($app) {
       this.setState({
         ...this.state,
         data: searchData.data,
-        error: false,
+        keyword: nextKeyword,
       });
     },
 
@@ -119,9 +120,7 @@ export default function App($app) {
   };
 
   const init = () => {
-    console.log("???");
     const storage = getLocalStorage();
-    console.log(storage);
     //데이터가 비어있거나, 없거나, 잘못 저장된 경우
     if (!storage || !storage.data || !storage.data.length) {
       return;
