@@ -6,6 +6,11 @@ export default function SearchInput({ $app, onSearch }) {
   this.$target.focus();
 
   this.onSearch = onSearch;
+
+  this.$target.addEventListener("click", (e) => {
+    e.target.value = "";
+  });
+
   this.$target.addEventListener("keyup", (e) => {
     if (e.key === 13) {
       this.onSearch(e.target.value);
