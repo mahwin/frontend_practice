@@ -1,19 +1,34 @@
-export default function SearchInput({ $app, onSearch }) {
-  this.$target = document.createElement("input");
+export default function SearchInput({ $app, onSearch, onClick }) {
+  this.$target = document.createElement("section");
   this.$target.className = "SearchInput";
-  this.$target.placeholder = "고양이를 검색해보세요.|";
+
+  this.$input = document.createElement("input");
+  this.$input.type = "text";
+  this.$input.className = "SearchInput";
+  this.$input.placeholder = "고양이를 검색해보세요.|";
+  this.$input.focus();
+
+  this.$button = document.createElement("button");
+  this.$button.className = "SearchRandom";
+  this.$button.innerHTML = "랜덤냐옹";
+
+  this.$target.appendChild(this.$input);
+  this.$target.appendChild(this.$button);
   $app.appendChild(this.$target);
-  this.$target.focus();
 
   this.onSearch = onSearch;
+  this.onClick = onClick;
 
-  this.$target.addEventListener("click", (e) => {
+  this.$input.addEventListener("click", (e) => {
     e.target.value = "";
   });
 
-  this.$target.addEventListener("keyup", (e) => {
-    if (e.key === 13) {
+  this.$input.addEventListener("keyup", (e) => {
+    if (e.key === "Enter") {
       this.onSearch(e.target.value);
     }
+  });
+  this.$button.addEventListener("click", () => {
+    this.onClick();
   });
 }

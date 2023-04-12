@@ -42,6 +42,17 @@ export default function App($app) {
         error: false,
       });
     },
+
+    onClick: async () => {
+      const randomData = await request("random");
+
+      setLocalStorage(randomData);
+
+      this.setState({
+        ...this.state,
+        data: randomData.data,
+      });
+    },
   });
 
   const searchResult = new SearchResult({
@@ -76,8 +87,8 @@ export default function App($app) {
   const searchKeyword = new SearchKeyword({
     $app,
     initialState: this.state.keyword,
-    onClick: (keyword) => {
-      const keywordData = request("search", keyword);
+    onClick: async (keyword) => {
+      const keywordData = await request("search", keyword);
 
       setLocalStorage(keywordData);
 
