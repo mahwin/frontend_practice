@@ -1,12 +1,14 @@
 import SearchInput from "./components/SearchInput.js";
 import SearchResult from "./components/SearchResult.js";
 import ImageInfo from "./components/ImageInfo.js";
+import Loading from "./components/Loading.js";
 
 import { request } from "./api/api.js";
 
 export default function App($app) {
   this.state = {
     visible: false,
+    loading: false,
     image: null,
     data: [],
   };
@@ -41,6 +43,11 @@ export default function App($app) {
     },
   });
 
+  const loading = new Loading({
+    $app,
+    initialState: this.state.loading,
+  });
+
   this.setState = (nextState) => {
     this.state = nextState;
     searchResult.setState(this.state.data);
@@ -48,5 +55,6 @@ export default function App($app) {
       image: this.state.image,
       visible: this.state.visible,
     });
+    loading.setState(this.state.loading);
   };
 }
