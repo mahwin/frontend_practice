@@ -24,6 +24,15 @@ export default function App($app) {
 
       if (!searchData.data) return;
 
+      let nextKeyword = [
+        keyword,
+        ...this.state.keyword.filter((word) => word != keyword),
+      ];
+
+      if (nextKeyword.length > 5) {
+        nextKeyword = nextKeyword.slice(0, 5);
+      }
+
       this.setState({
         ...this.state,
         data: searchData.data,
