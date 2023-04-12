@@ -1,4 +1,6 @@
-export default function SearchResult({ $app, initialState }) {
+import LazyLoad from "../lib/LazyLoading";
+
+export default function SearchResult({ $app, initialState, onClick }) {
   this.state = initialState;
   this.$target = document.createElement("div");
   this.$target.className = "SearchResult";
@@ -7,16 +9,17 @@ export default function SearchResult({ $app, initialState }) {
   this.setState = (nextState) => {
     this.state = nextState;
     this.render();
+    LazyLoad();
   };
 
   this.render = () => {
-    if (this.state.data) {
-      this.$target.innerHTML = this.state.data
+    if (this.state) {
+      this.$target.innerHTML = this.state
         .map(
           (cat, index) =>
             `
       <div class='item' data-index=${index}>
-        <img src=${cat.url} alt=${cat.name}/>
+        <img class="lazy" src=${cat.url} alt=${cat.name}/>
       </div>
       `
         )
@@ -27,10 +30,12 @@ export default function SearchResult({ $app, initialState }) {
   this.onClick = onClick;
 
   this.$target.addEventListener("click", (e) => {
-    const $searchItem = e.target.closes(".item");
+    console.log(e.target);
+    const $searchItem = e.target.closest(".item");
     const { index } = $searchItem.dataset;
     this.onClick(this.state[index]);
   });
 
   this.render();
+  LazyLoad();
 }
