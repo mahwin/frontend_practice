@@ -1,13 +1,28 @@
-export default function ImageInfo({ $app, initialState }) {
+export default function ImageInfo({ $app, initialState, onBackClick }) {
   this.state = initialState;
   this.$target = document.createElement("div");
   this.$target.className = "ImageInfo";
   $app.appendChild(this.$target);
 
-  this.setState((newState) => {
+  this.onBackClick = onBackClick;
+
+  //esc
+  this.$target.addEventListener("click", (e) => {
+    if (e.key === "Escape") this.onBackClick();
+  });
+
+  //모달 영역 밖이나, 우측 상단의 닫기를 누를 때
+  this.$target.addEventListener("click", (e) => {
+    const $className = e.target.classList;
+    if ($className.contains("ImageInfo") || $className.contains("close")) {
+      this.onBackClick();
+    }
+  });
+
+  this.setState = (newState) => {
     this.state = newState;
     this.render();
-  });
+  };
 
   this.render = () => {
     if (this.state.image) {
@@ -27,5 +42,6 @@ export default function ImageInfo({ $app, initialState }) {
     }
     this.$target.style.display = this.state.visible ? "block" : "none";
   };
+
   this.render();
 }
