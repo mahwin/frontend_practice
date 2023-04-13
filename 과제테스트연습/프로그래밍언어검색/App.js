@@ -40,5 +40,8 @@ export default function App({ $target }) {
       cursor: 0,
       items: [],
     },
+    onSelecte: (language) => {
+      alert(language);
+    },
   });
 }
