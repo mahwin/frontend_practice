@@ -13,7 +13,7 @@ export default function SearchResult({ $app, initialState, onClick }) {
 
     if ($item) {
       const { index } = $item.dataset;
-      const itemId = this.state.data[parseInt(index, 10)].id;
+      const itemId = this.state.data[index].id;
       this.onClick(index ? itemId : null);
     }
   });
@@ -25,16 +25,15 @@ export default function SearchResult({ $app, initialState, onClick }) {
   };
 
   this.render = () => {
-    if (this.state) {
-      this.$target.innerHTML = this.state
+    console.log(this.state);
+    if (this.state.data) {
+      this.$target.innerHTML = this.state.data
         .map(
           (cat, index) =>
-            `
-      <div class='item' data-index=${index}>
-        <img class="lazy" src=${cat.url} alt=${cat.name}/>
-        <div>${cat.name}</div>
-      </div>
-      `
+            `<div class="item" data-index=${index}>
+              <img class="lazy" src=${cat.url} alt=${cat.name}/>
+              <div>${cat.name}</div>
+            </div>`
         )
         .join("");
     }

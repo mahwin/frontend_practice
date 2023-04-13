@@ -59,10 +59,12 @@ export default function App($app) {
   const searchResult = new SearchResult({
     $app,
     initialState: [],
-    onClick: (image) => {
+    onClick: async (catId) => {
+      const imageData = await request("", catId);
       this.setState({
+        ...this.state,
         visible: true,
-        image,
+        image: imageData.data,
       });
     },
   });
@@ -112,14 +114,15 @@ export default function App($app) {
 
   this.setState = (nextState) => {
     this.state = nextState;
-    searchResult.setState(this.state.data);
+    searchResult.setState(this.state);
+
     imageInfo.setState({
       image: this.state.image,
       visible: this.state.visible,
     });
+
     loading.setState(this.state.loading);
     searchError.setState(this.state.error);
-
     searchKeyword.setState(this.state.keyword);
   };
 
