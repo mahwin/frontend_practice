@@ -40,8 +40,23 @@ export default function App({ $target }) {
       cursor: 0,
       items: [],
     },
-    onSelecte: (language) => {
+    onSelect: (language) => {
       alert(language);
+      const nextSelectedLanguages = [...this.state.selectedLanguages];
+
+      const index = nextSelectedLanguages.findIndex(
+        (selectedLanguage) => selectedLanguage === language
+      );
+
+      if (index > -1) {
+        nextSelectedLanguages.splice(index, 1);
+      }
+      nextSelectedLanguages.push(language);
+
+      this.setState({
+        ...this.state,
+        selectedLanguages: nextSelectedLanguages,
+      });
     },
   });
 }
