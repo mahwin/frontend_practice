@@ -6,6 +6,18 @@ export default function SearchResult({ $app, initialState, onClick }) {
   this.$target.className = "SearchResult";
   $app.appendChild(this.$target);
 
+  this.onClick = onClick;
+
+  this.$target.addEventListener("click", (e) => {
+    const $item = e.target.closest(".item");
+
+    if ($item) {
+      const { index } = $item.dataset;
+      const itemId = this.state.data[parseInt(index, 10)].id;
+      this.onClick(index ? itemId : null);
+    }
+  });
+
   this.setState = (nextState) => {
     this.state = nextState;
     this.render();
