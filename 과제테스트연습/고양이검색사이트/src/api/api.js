@@ -1,5 +1,5 @@
 const API_END_POINT =
-  "https://q9d70f82kd.execute-api.ap-northeast-2.amazonaws.com/dev";
+  "https://q9d70f82kd.execute-api.ap-northeast-2.amazonaws.com/dev/api/cats";
 
 export const request = async (type, payload) => {
   let API_SUB_POINT = "";
