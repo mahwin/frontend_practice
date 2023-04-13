@@ -43,7 +43,7 @@ export default function Suggestion({ $target, initialState, onSelect }) {
     if (this.state.items.length > 0) {
       const { selectedIndex } = this.state;
       const lastIndex = this.state.items.length - 1;
-      const navigationKeys = ["ArrowUp", "ArrowDown"];
+      const navigationKeys = ["ArrowUp", "ArrowDown", "Enter"];
       let nextIndex = selectedIndex;
 
       if (navigationKeys.includes(e.key)) {
@@ -59,6 +59,19 @@ export default function Suggestion({ $target, initialState, onSelect }) {
           ...this.state,
           selectedIndex: nextIndex,
         });
+      }
+    }
+  });
+
+  this.$element.addEventListener("click", (e) => {
+    const $li = e.target.closest("li");
+    if ($li) {
+      const { index } = $li.dataset;
+
+      try {
+        onSelect(this.state.items[parseInt(index)]);
+      } catch (e) {
+        alert("알 수 없는 오류가 발생했습니다.");
       }
     }
   });
