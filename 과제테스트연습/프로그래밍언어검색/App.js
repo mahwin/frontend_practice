@@ -1,3 +1,4 @@
+import SelectedLanguages from "./SelectedLanguages.js";
 import SearchInput from "./SearchInput.js";
 import Suggestion from "./Suggestion.js";
 
@@ -6,7 +7,7 @@ import { fetchLanguages } from "./api.js";
 export default function App({ $target }) {
   this.state = {
     fetchedLanguages: [],
-    selectedLanguages: [],
+    selectedLanguges: [],
   };
 
   this.setState = (nextState) => {
@@ -15,7 +16,13 @@ export default function App({ $target }) {
       selectedIndex: 0,
       items: this.state.fetchedLanguages,
     });
+    selectedLanguages.setState(this.state.selectedLanguges);
   };
+
+  const selectedLanguages = new SelectedLanguages({
+    $target,
+    initialState: [],
+  });
 
   const searchInput = new SearchInput({
     $target,
@@ -42,10 +49,10 @@ export default function App({ $target }) {
     },
     onSelect: (language) => {
       alert(language);
-      const nextSelectedLanguages = [...this.state.selectedLanguages];
+      const nextSelectedLanguages = [...this.state.selectedLanguges];
 
       const index = nextSelectedLanguages.findIndex(
-        (selectedLanguage) => selectedLanguage === language
+        (selectedLanguges) => selectedLanguges === language
       );
 
       if (index > -1) {
@@ -55,7 +62,7 @@ export default function App({ $target }) {
 
       this.setState({
         ...this.state,
-        selectedLanguages: nextSelectedLanguages,
+        selectedLanguges: nextSelectedLanguages,
       });
     },
   });
