@@ -1,18 +1,18 @@
-const API_END_POINT = "https://source.unsplash.com/random/300x300/?programming";
+const API_END_POINT =
+  "https://q9d70f82kd.execute-api.ap-northeast-2.amazonaws.com/dev/api/cats/random50";
 export const request = async () => {
   const res = await fetch(API_END_POINT);
 
   switch (res.status / 100) {
     case 3:
-      console.log(`리디렉션 ${res.state}`);
-      break;
+      return `리디렉션 ${res.state}`;
     case 4:
-      console.log(`클라이언트 오류 ${res.state}`);
-      break;
+      return `클라이언트 오류 ${res.state}`;
+
     case 5:
-      console.log(`서버 오류 ${res.state}`);
-      break;
+      return `서버 오류 ${res.state}`;
 
     default:
+      return res.json();
   }
 };
