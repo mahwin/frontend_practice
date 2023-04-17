@@ -7,7 +7,7 @@ class Header {
     const div = document.createElement("div");
     div.setAttribute("class", divClass);
 
-    const span = document.createAttribute("span");
+    const span = document.createElement("span");
     span.setAttribute("class", spanClass);
     span.setAttribute("id", spanId);
     span.appendChild(document.createTextNode(menuText));
@@ -16,7 +16,7 @@ class Header {
     return div;
   }
 
-  return() {
+  render() {
     const header = document.createElement("header");
     const home_menu = this.createMenuElem(
       "header header_left",
@@ -30,6 +30,25 @@ class Header {
       "menu_signup",
       "SIGNUP"
     );
+
+    home_menu.addEventListener("click", () => {
+      window.history.pushState("", "", "/web/");
+      const urlChange = new CustomEvent("urlchange", {
+        detail: { href: "/web/" },
+      });
+
+      document.dispatchEvent(urlChange);
+    });
+
+    signup_menu.addEventListener("click", () => {
+      window.history.pushState("", "", "/web/signup");
+
+      const urlChange = new CustomEvent("urlchange", {
+        detail: { href: "/web/signup" },
+      });
+
+      document.dispatchEvent(urlChange);
+    });
 
     header.appendChild(home_menu);
     header.appendChild(signup_menu);
