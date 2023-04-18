@@ -1,5 +1,7 @@
-export default function SearchInput({ $App, initialState }) {
+export default function SearchInput({ $App, initialState, onChange }) {
   this.state = initialState;
+
+  this.onChange = onChange;
 
   this.$form = document.createElement("form");
   this.$form.className = "SearchInput";
@@ -9,11 +11,15 @@ export default function SearchInput({ $App, initialState }) {
     input.className = "SearchInput__input";
     input.type = "text";
     input.placeholder = "프로그램 언어를 입력하세요.";
-    input.value = "Script";
+    input.style = "onfocus";
 
     this.$form.appendChild(input);
 
     $App.appendChild(this.$form);
+
+    input.addEventListener("keyup", (e) => {
+      onChange(e.target.value);
+    });
   };
 
   this.render();
