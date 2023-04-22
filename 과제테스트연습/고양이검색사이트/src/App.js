@@ -1,143 +1,42 @@
-import SearchInput from "./components/SearchInput.js";
-import SearchResult from "./components/SearchResult.js";
-import ImageInfo from "./components/ImageInfo.js";
-import Loading from "./components/Loading.js";
-import SearchError from "./components/SearchError.js";
-import SearchKeyword from "./components/SearchKeyword.js";
+console.log("app is running!");
 
-import { setLocalStorage, getLocalStorage } from "./lib/LocalStorage.js";
-import { request } from "./api/api.js";
+class App {
+  $target = null;
+  data = [];
 
-export default function App($app) {
-  this.state = {
-    error: false,
-    visible: false,
-    loading: false,
-    image: null,
-    data: [],
-    keyword: [],
-  };
+  constructor($target) {
+    this.$target = $target;
 
-  const searchInput = new SearchInput({
-    $app,
-    onSearch: async (keyword) => {
-      const searchData = await request("search", keyword);
-
-      if (!searchData.data) return;
-
-      console.log(this.state);
-      let nextKeyword = [
-        keyword,
-        ...this.state.keyword.filter((word) => word != keyword),
-      ];
-
-      if (nextKeyword.length > 5) {
-        nextKeyword = nextKeyword.slice(0, 5);
-      }
-
-      setLocalStorage(searchData);
-
-      this.setState({
-        ...this.state,
-        data: searchData.data,
-        keyword: nextKeyword,
-      });
-    },
-
-    onClick: async () => {
-      const randomData = await request("random");
-
-      setLocalStorage(randomData);
-
-      this.setState({
-        ...this.state,
-        data: randomData.data,
-      });
-    },
-  });
-
-  const searchResult = new SearchResult({
-    $app,
-    initialState: [],
-    onClick: async (catId) => {
-      const imageData = await request("", catId);
-      this.setState({
-        ...this.state,
-        visible: true,
-        image: imageData.data,
-      });
-    },
-  });
-
-  const imageInfo = new ImageInfo({
-    $app,
-    initialState: {
-      visible: false,
-      image: null,
-    },
-
-    onBackClick: () => {
-      this.setState({ ...this.state, visible: false, image: null });
-    },
-  });
-
-  const loading = new Loading({
-    $app,
-    initialState: this.state.loading,
-  });
-
-  const searchError = new SearchError({
-    $app,
-    initialState: this.state.error,
-  });
-
-  const searchKeyword = new SearchKeyword({
-    $app,
-    initialState: this.state.keyword,
-    onClick: async (keyword) => {
-      const keywordData = await request("search", keyword);
-
-      setLocalStorage(keywordData);
-
-      const nextKeyword = [
-        keyword,
-        ...this.state.keyword.filter((word) => word != keyword),
-      ];
-
-      this.setState({
-        ...this.state,
-        data: keywordData.data,
-        keyword: nextKeyword,
-      });
-    },
-  });
-
-  this.setState = (nextState) => {
-    this.state = nextState;
-    searchResult.setState(this.state);
-
-    imageInfo.setState({
-      image: this.state.image,
-      visible: this.state.visible,
+    this.searchInput = new SearchInput({
+      $target,
+      onSearch: (keyword) => {
+        api.fetchCats(keyword).then(({ data }) => this.setState(data));
+      },
     });
 
-    loading.setState(this.state.loading);
-    searchError.setState(this.state.error);
-    searchKeyword.setState(this.state.keyword);
-  };
-
-  const init = () => {
-    const storage = getLocalStorage();
-    //데이터가 비어있거나, 없거나, 잘못 저장된 경우
-    if (!storage || !storage.data || !storage.data.length) {
-      return;
-    }
-
-    this.setState({
-      ...this.state,
-      data: storage.data,
+    this.searchResult = new SearchResult({
+      $target,
+      initialData: this.data,
+      onClick: (image) => {
+        this.imageInfo.setState({
+          visible: true,
+          image,
+        });
+      },
     });
-  };
 
-  init();
+    this.imageInfo = new ImageInfo({
+      $target,
+      data: {
+        visible: false,
+        image: null,
+      },
+    });
+  }
+
+  setState(nextData) {
+    console.log(this);
+    this.data = nextData;
+    this.searchResult.setState(nextData);
+  }
 }
