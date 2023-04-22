@@ -1,5 +1,3 @@
-const TEMPLATE = '<input type="text">';
-
 class SearchInput {
   constructor({ $target, onSearch }) {
     const $searchInput = document.createElement("input");
@@ -9,13 +7,22 @@ class SearchInput {
     $searchInput.className = "SearchInput";
     $target.appendChild($searchInput);
 
+    //다크 모드
+    const $themeInput = document.createElement("input");
+    $themeInput.type = "checkbox";
+
+    $themeInput.addEventListener("click", () => {
+      alert("클릭");
+    });
+
     $searchInput.addEventListener("keyup", (e) => {
-      if (e.keyCode === 13) {
+      if (e.key === "Enter") {
         onSearch(e.target.value);
       }
     });
-
-    console.log("SearchInput created.", this);
+    $target.appendChild($themeInput);
   }
   render() {}
 }
+
+export default SearchInput;

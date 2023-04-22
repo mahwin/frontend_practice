@@ -1,4 +1,8 @@
-console.log("app is running!");
+import SearchInput from "./components/SearchInput.js";
+import SearchResult from "./components/SearchResult.js";
+import ImageInfo from "./components/ImageInfo.js";
+
+import { api } from "./api.js";
 
 class App {
   $target = null;
@@ -6,7 +10,6 @@ class App {
 
   constructor($target) {
     this.$target = $target;
-
     this.searchInput = new SearchInput({
       $target,
       onSearch: (keyword) => {
@@ -40,3 +43,5 @@ class App {
     this.searchResult.setState(nextData);
   }
 }
+
+export default App;
