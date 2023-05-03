@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>숫자 야구 게임</title>
+  </head>
+  <body>
+    <h1>숫자 야구 게임</h1>
+    <form class="digit">
+      <select type="select" class="digit" onChange="digitSelect()">
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+      <button class="digit start">게임 시작</button>
+    </form>
+    <div class="answer"></div>
+    <div class="trial"></div>
+    <div class="dev"></div>
+    <script src="main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,100 @@
+body {
+  margin: 0 auto;
+  text-align: center;
+}
+.hidden {
+  display: none;
+}
+
+form.digit {
+  text-align: center;
+  height: 35px;
+  display: inline-flex;
+  gap: 10px;
+}
+
+button.digit {
+  width: 70px;
+  height: 100%;
+  border-radius: 10px;
+  margin: 0;
+}
+
+button.digit:hover {
+  cursor: pointer;
+}
+
+select {
+  width: 60px;
+  height: 100%;
+  font-size: 24px;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 10px;
+}
+select:hover {
+  cursor: pointer;
+}
+
+.display {
+  width: 100px;
+  height: 100px;
+  color: black;
+}
+
+.numbers {
+  display: inline-block;
+  width: 300px;
+  margin-top: 30px;
+  border-radius: 5px;
+}
+.numbers-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.numbers-grid .input {
+  width: 30px;
+}
+
+.btn:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+div.trial {
+  width: 300px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div.inputContainer {
+  margin-top: 20px;
+  display: inline-flex;
+  justify-content: space-around;
+  width: 300px;
+}
+
+input.number {
+  width: 40px;
+  height: 40px;
+  font-weight: 800;
+  font-size: 20px;
+  border-radius: 100%;
+  text-align: center;
+}
+
+button.score {
+  display: inline-block;
+  margin-top: 20px;
+  height: 30px;
+  width: 100px;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  cursor: pointer;
+}
+button.score:hover {
+  border: 2px solid gray;
+  transform: scale(1.05);
+}

@@ -1,0 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+main#App {
+  height: 100vh;
+  border: 5px solid orchid;
+  display: flex;
+  align-items: center;
+}
+
+.Slides {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  gap: 5px;
+  text-align: center;
+}
+.Slide {
+  border-radius: 5px;
+  width: 80px;
+  height: 100px;
+  background-color: burlywood;
+  line-height: 100px;
+}

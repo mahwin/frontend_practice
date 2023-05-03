@@ -11,8 +11,11 @@ html {
 
 body * {
   font-family: Goyang;
-  background-color: #000;
-  color: white;
+}
+
+body {
+  background-color: #fff;
+  color: black;
 }
 
 *,

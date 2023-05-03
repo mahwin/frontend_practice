@@ -2,6 +2,7 @@
   padding: 64px 16px;
   text-align: center;
 }
+
 .section__tag {
   font-size: var(--font-size-tag);
   color: var(--color-sub);
@@ -16,6 +17,6 @@
 @media (min-width: 769px) {
   main {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 }
