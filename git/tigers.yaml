@@ -1,7 +1,10 @@
 team: Tigers
-manager: John
+manager: Donald
+
+coatch: Grace
 
 members:
   - Linda
   - William
   - David
+  - George
