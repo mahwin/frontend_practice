@@ -14,7 +14,6 @@ module.exports = class Trie {
     this.words = [];
   }
   push(info) {
-    console.log("info", info);
     const chars = info.word;
     let currentNode = this.root;
     for (let i = 0; i < chars.length; i++) {
@@ -67,6 +66,6 @@ module.exports = class Trie {
         nodes.push(...Object.values(node.child));
       }
     }
-    return this.words.length > 5 ? this.sort() : this.words;
+    return this.words.length > 10 ? this.sort() : this.words;
   }
 };
