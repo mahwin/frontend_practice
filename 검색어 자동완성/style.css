@@ -5,3 +5,24 @@
 body {
   background-color: cadetblue;
 }
+
+#App {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.SearchInput {
+  width: 400px;
+  height: 20px;
+  border-radius: 5px;
+  border: none;
+  padding: 20px 12px;
+  font-size: 24px;
+  color: darkslategray;
+}
+
+.SearchInput:focus {
+  outline: 2px solid orange;
+}
