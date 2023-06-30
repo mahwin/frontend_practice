@@ -1,4 +1,4 @@
-const rowData = require("./data.json");
+const rowData = require("../assets/data.json");
 const Trie = require("./trie.js");
 
 function makeTrie(data) {
@@ -16,4 +16,4 @@ function makeTrie(data) {
 }
 
 const data = JSON.parse(rowData.data);
-makeTrie(data);
+exports.modules = makeTrie(data);
