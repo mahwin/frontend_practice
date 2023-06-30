@@ -8,7 +8,7 @@ class TrieNode {
   }
 }
 
-module.exports = class Trie {
+class Trie {
   constructor() {
     this.root = new TrieNode();
     this.words = [];
@@ -31,18 +31,18 @@ module.exports = class Trie {
     currentNode.end = true;
   }
 
-  sort() {
-    // this.words
-    //   .sort((a, b) => {
-    //     console.log(a, b);
-    //     if (a.frequency == b.frequency) return a.word.length - b.word.length;
-    //     else return b.frequency - a.frequency;
-    //   })
-    //   .slice(0, 5);
-    return this.words;
+  sort(len) {
+    if (this.words.length === 0) return [];
+
+    return this.words
+      .sort((a, b) => {
+        if (a.frequency == b.frequency) return a.word.length - b.word.length;
+        else return b.frequency - a.frequency;
+      })
+      .slice(0, len);
   }
 
-  autoComplete(chars) {
+  autoComplete(chars, len) {
     this.words = [];
     let currentNode = this.root;
     for (let i = 0; i < chars.length; i++) {
@@ -50,22 +50,25 @@ module.exports = class Trie {
       if (currentNode.child[currentChar]) {
         currentNode = currentNode.child[currentChar];
       } else {
-        return false;
+        return [];
       }
     }
     if (currentNode.end) {
-      this.words.push(currentNode.infos);
+      this.words.push(...currentNode.infos);
     }
     const nodes = Object.values(currentNode.child);
 
     while (nodes.length) {
       const node = nodes.pop();
       if (node.end) {
-        this.words.push(node.infos);
+        this.words.push(...node.infos);
       } else {
         nodes.push(...Object.values(node.child));
       }
     }
-    return this.words.length > 10 ? this.sort() : this.words;
+
+    return this.sort(len);
   }
-};
+}
+
+export default Trie;

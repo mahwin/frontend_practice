@@ -1,5 +1,5 @@
-const rowData = require("../assets/data.json");
-const Trie = require("./trie.js");
+import rowData from "../assets/data.json" assert { type: "json" };
+import Trie from "./trie.js";
 
 function makeTrie(data) {
   const trie = new Trie();
@@ -13,7 +13,9 @@ function makeTrie(data) {
       }
     }
   }
+  return trie;
 }
 
 const data = JSON.parse(rowData.data);
-exports.modules = makeTrie(data);
+
+export default makeTrie(data);
