@@ -43,6 +43,7 @@ class Trie {
   }
 
   autoComplete(chars, len) {
+    if (chars === "") return [];
     this.words = [];
     let currentNode = this.root;
     for (let i = 0; i < chars.length; i++) {

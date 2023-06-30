@@ -1,4 +1,5 @@
 import SearchInput from "./SearchInput.js";
+import Suggestion from "./Suggestion.js";
 import trie from "./util/makeTrie.js";
 
 export default function App({ target }) {
@@ -8,10 +9,15 @@ export default function App({ target }) {
   };
 
   this.setState = (newKeyword) => {
+    console.log(newKeyword);
     this.state = {
       keyword: newKeyword,
-      searchResult: trie.autoComplete(this.state.keyword, 10),
+      searchResult: trie.autoComplete(newKeyword, 10),
     };
+
+    suggestion.setState({
+      searchResult: this.state.searchResult,
+    });
   };
 
   const searchInput = new SearchInput({
@@ -19,5 +25,9 @@ export default function App({ target }) {
     onChange: (newKeyword) => {
       this.setState(newKeyword);
     },
+  });
+
+  const suggestion = new Suggestion({
+    target: target,
   });
 }
